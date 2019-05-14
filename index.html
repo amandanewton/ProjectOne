@@ -2,52 +2,163 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="assets/css/style.css">
-    </head>
-    <body>
-        
-        <div class="container">
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
-            <header>
-                <h1> Date Night </h1>
-            </header>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Date Night</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
 
-            <div class="container-fluid">
+<body data-spy="scroll" data-target=".navbar" data-offset="100">
 
-            <div class="card">
-                <img id="dinnerPic" src="https://fodmap-publicsite-us-east-2.s3.amazonaws.com/production/media/images/Eating_out_on_a_Low_FODMAP_Diet.original.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Dinner</h5>
-                <p class="card-text">Click the button below to get a dinner suggestion </p>
-                <a href="#" id="generateFood" class="btn btn-primary">What to eat?</a>
+    <div class="container">
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center fixed-top">
+            <ul class="navbar-nav">
+                <li class="nav-item" id="dinnerNav">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item" id="dinnerNav">
+                    <a class="nav-link" href="#dinnerTop">Dinner</a>
+                </li>
+                <li class="nav-item" id="movieNav">
+                    <a class="nav-link" href="#movieTop">Movie</a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <span class="anchor" id="home"> </span>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <img src="assets/datenight.png">
+                <p>Date Night is here to take the drama out of relationships and put it back where it belongs... in
+                    Hollywood! Below you'll find two sections that will make the two most important decisions on date
+                    night as easy! </p>
             </div>
-
-            <div class="card">
-                <img id="moviePic" src="https://cnet2.cbsistatic.com/img/x7wuV8zJXZqcLlS69HizMkSYYv0=/940x0/2019/04/02/0f0b1a02-e399-4c62-b409-c92a2b1904d2/reald3d.jpg"" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Movie</h5>
-                <p class="card-text">Click the button below to get a movie suggestion </p>
-                <a href="#" id="generateMovie" class="btn btn-primary">What to watch?</a>
-            </div>
-        
-            </div>
-
-            
         </div>
-        
-        <!-- jQuery link -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- local JS file -->
-<script src="assets/javascript/movies.js" async defer></script>
-<script src="assets/javascript/yelp.js" async defer></script>
 
-    </body>
+        <span class="anchor" id="dinnerTop"> </span>
+        <div class="container-fluid">
+
+            <div id="dinnerContain">
+                <div class="card">
+                    <h2> Question #1: What's for dinner?? </h2>
+                    <img id="dinnerPic"
+                        src="https://fodmap-publicsite-us-east-2.s3.amazonaws.com/production/media/images/Eating_out_on_a_Low_FODMAP_Diet.original.jpg"
+                        class="card-img-top" alt="picture of food">
+                    <div class="card-body">
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dinnerModal">
+                            What to eat? </button>
+                        <div class="modal" id="dinnerModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title"> What's for dinner? </h4>
+                                        <form>
+                                            <select class="form-control form-control-sm">
+                                                <option>Healthy</option>
+                                                <option>Tasty</option>
+                                            </select>
+                                            <select class="form-control form-control-sm">
+                                                <option>Fast</option>
+                                                <option>Fancy</option>
+                                            </select>
+                                            <select class="form-control form-control-sm">
+                                                <option>Cheap</option>
+                                                <option>Good</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+
+                                        <button type="button" class="close" data-dismiss="modal"> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <span class="anchor" id="movieTop"> </span>
+        <div class="container-fluid">
+
+            <div id="movieContain">
+                <div class="card">
+                    <h2> Question #2: And what do we watch?? </h2>
+                    <img id="moviePic"
+                        src="https://cnet2.cbsistatic.com/img/x7wuV8zJXZqcLlS69HizMkSYYv0=/940x0/2019/04/02/0f0b1a02-e399-4c62-b409-c92a2b1904d2/reald3d.jpg" class="
+                        card-img-top" alt="picture of the movie">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#movieModal">
+                                What to watch? </button>
+                            <div class="modal" id="movieModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title"> What to watch? </h4>
+                                            <form>
+                                                <select class="form-control form-control-sm">
+                                                    <option>New</option>
+                                                    <option>Old</option>
+                                                </select>
+                                                <select class="form-control form-control-sm">
+                                                    <option>Romantic</option>
+                                                    <option>Scary</option>
+                                                </select>
+                                                <select class="form-control form-control-sm">
+                                                    <option>Funny</option>
+                                                    <option>Serious</option>
+                                                </select>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+    
+                                            <button type="button" class="close" data-dismiss="modal"> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center fixed-bottom">
+            <ul class="navbar-nav">
+                <li class="nav-item" id="dinnerNav">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item" id="dinnerNav">
+                    <a class="nav-link" href="#dinnerTop">Dinner</a>
+                </li>
+                <li class="nav-item" id="movieNav">
+                    <a class="nav-link" href="#movieTop">Movie</a>
+                </li>
+            </ul>
+        </nav>
+
+        <footer></footer>
+
+        <!-- jQuery link -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- local JS file -->
+        <script src="assets/javascript/movies.js" async defer></script>
+        <script src="assets/javascript/yelp.js" async defer></script>
+
+</body>
+
 </html>
