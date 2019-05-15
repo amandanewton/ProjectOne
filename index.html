@@ -12,11 +12,29 @@
     <title>Date Night</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
+
+    <!-- jQuery link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    
+    <!-- Bootstrap jQuery -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Does ajax have to be loaded separately? -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!-- Is this ajax link any different from the previous one? -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    
+    <!-- External font -->
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+    
+    <!-- Custom style shet -->
     <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Inika" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -25,20 +43,20 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="100">
 
     <div class="container">
-
         <div class="jumbotron jumbotron2">
             <h1 class="text-center">
                 <div id="text1"> Couples Counseling </div>
+                <br>
             </h1>
         </div> <!-- Jumbotron-->
 
         <span class="anchor" id="home"> </span>
         <div class="jumbotron jumbotron1 jumbotron-fluid">
             <div class="container1">
-                <img src="assets/datenight.png" alt="chaulkboard with date night words" class="responsive">
-                <p>Taking the drama out of relationships and putting it back where it belongs... in
-                    Hollywood! Below we  two most difficult decisions on date
-                    night and make them easy! </p>
+                <img id="date-night" src="assets/datenight.png">
+                <p>Date Night is here to take the drama out of relationships and put it back where it belongs...in
+                    Hollywood! Below you'll find two sections that will simplify the two most important decisions on date
+                    night! </p>
             </div>
         </div>
 
@@ -50,7 +68,7 @@
 
                         <div class="card-body">
                             <div class="card">
-                                <h2> What's for dinner?? </h2>
+                                <h2> What's for dinner?</h2>
                                 <img class="pic" id="dinnerPic"
                                     src="https://images.unsplash.com/photo-1467453678174-768ec283a940?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1928&q=80"
                                     class="card-img-top" alt="picture of food">
@@ -107,30 +125,49 @@
 
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#movieModal">
-                                    Click me for movie </button>
-                                <img id="logo"
-                                    src="https://www.themoviedb.org/assets/2/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png">
+                                    Find movies!</button>
+                                    <div id="movie-results"></div>
+                                   
                                 <div class="modal" id="movieModal">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title"> What to watch? </h4>
                                                 <form>
-                                                    <select class="form-control form-control-sm">
-                                                        <option># of movies</option>
+                                                    <select id="number-of-movies" class="form-control form-control-sm">
+                                                        <option>Choose # of movies to return (default: 5)</option>
                                                         <option>1</option>
                                                         <option>3</option>
-                                                        <option>5</option>
+                                                        <option selected="selected">5</option>
+                                                        <option>10</option>
                                                     </select>
-                                                    <select class="form-control form-control-sm">
-                                                        <option>Romantic</option>
-                                                        <option>Scary</option>
+                                                    <select id="genre" class="form-control form-control-sm">
+                                                        <option>Choose a genre (default: random)</option>
+                                                        <option selected="selected">Random</option>
+                                                        <option>Action</option>
+                                                        <option>Adventure</option>
+                                                        <option>Animation</option>
+                                                        <option>Comedy</option>
+                                                        <option>Crime</option>
+                                                        <option>Documentary</option>
+                                                        <option>Drama</option>
+                                                        <option>Family</option>
+                                                        <option>Fantasy</option>
+                                                        <option>History</option>
+                                                        <option>Horror</option>
+                                                        <option>Music</option>
+                                                        <option>Mystery</option>
+                                                        <option>Romance</option>
+                                                        <option>Science Fiction</option>
+                                                        <option>TV Movie</option>
+                                                        <option>Thriller</option>
+                                                        <option>War</option>
+                                                        <option>Western</option>
                                                     </select>
-                                                    <select class="form-control form-control-sm">
-                                                        <option>Funny</option>
-                                                        <option>Serious</option>
-                                                    </select>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <label class="radio-inline"><input id="streaming" type="radio" name="optradio" checked>Streaming</label>
+                                                        <label class="radio-inline"><input id="in-theaters" type="radio" name="optradio">In Theaters</label>
+                                                    <img id="logo" style="float: right" src="https://www.themoviedb.org/assets/2/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png">
+                                                    <button id="pick-movies" class="btn btn-primary">Submit</button>
                                                 </form>
 
                                                 <button type="button" class="close" data-dismiss="modal"> </button>
@@ -145,12 +182,12 @@
                 </div> <!-- card-->
 
 
-
+                
             </div>
-
+           
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center fixed-bottom">
                 <ul class="navbar-nav">
-                    <li class="nav-item" id="dinnerNav">
+                    <li class="nav-item" id="homeNave">
                         <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item" id="dinnerNav">
@@ -164,8 +201,7 @@
 
             <footer></footer>
 
-            <!-- jQuery link -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
             <!-- local JS file -->
             <script src="assets/javascript/movies.js" async defer></script>
             <script src="assets/javascript/yelp.js" async defer></script>
