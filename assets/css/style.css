@@ -59,10 +59,6 @@ h2 {
     border-radius: 5px;
 }
 
-/* .jumbotron1 img {
-    max-height: 450px;
-} */
-
 .jumbotron1 p {
     color: navy;
     font-size: 1.5em;
@@ -72,11 +68,25 @@ h2 {
     margin: 10px 12.5% 0px 12.5%;
     font-weight: bold;
    
+    font-family: 'Inika', serif;
+    color: white;
+    font-size: 1.5em;
+    margin-top: 1%;
 }
+
+.responsive {
+    width: 90%;
+    height: auto;
+}
+
 
 .card {
     background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimage.freepik.com%2Ffree-vector%2Fblue-geometric-abstract-chaotic-triangle-pattern-background-mosaic-vector-graphic-design_1164-1491.jpg");
     background-attachment: fixed;
+}
+
+.card h2 {
+    font-family: 'Monoton', cursive;
 }
 
 .anchor {

@@ -35,6 +35,8 @@
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
     
     <!-- Custom style shet -->
+    <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inika" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -63,42 +65,49 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
-                        
+
                         <div class="card-body">
                             <div class="card">
                                 <h2> What's for dinner?</h2>
                                 <img class="pic" id="dinnerPic"
                                     src="https://images.unsplash.com/photo-1467453678174-768ec283a940?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1928&q=80"
                                     class="card-img-top" alt="picture of food">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#dinnerModal">
-                                    Find food! </button>
-                                <div class="modal" id="dinnerModal">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title"> What's for dinner? </h4>
-                                                <form>
-                                                    <select class="form-control form-control-sm">
-                                                        <option>Healthy</option>
-                                                        <option>Tasty</option>
-                                                    </select>
-                                                    <select class="form-control form-control-sm">
-                                                        <option>Fast</option>
-                                                        <option>Fancy</option>
-                                                    </select>
-                                                    <select class="form-control form-control-sm">
-                                                        <option>Cheap</option>
-                                                        <option>Good</option>
-                                                    </select>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
+                                <!-- Here we create an HTML Form for handling the inputs-->
+                                <form role="form">
 
-                                                <button type="button" class="close" data-dismiss="modal"> </button>
-                                            </div>
-                                        </div>
+                                    <!-- Here we create the text box for capturing the search term-->
+                                    <div class="form-group">
+                                        <label for="search">Search Term:</label>
+                                        <input type="text" class="form-control" id="search-term"
+                                            placeholder="Tacos, Pizza, Sports Bar, etc." required>
                                     </div>
-                                </div>
+
+                                    <!-- Here we capture the number of records that the user wants to retrieve  -->
+                                    <div class="form-group">
+                                        <label for="pwd">Number of Records to Retrieve:</label>
+                                        <select id="restaurant-count" class="custom-select"
+                                            aria-labelledby="dropdownMenuButton">
+                                            <option selected value="1">1</option>
+                                            <!-- Setting the option for 5 as default -->
+                                            <option value="5" selected>5</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Here we capture the Location Parameter-->
+                                    <div class="form-group">
+                                        <label for="search">Location (City, State):</label>
+                                        <input type="text" class="form-control" id="location-term"
+                                            placeholder="Portsmouth, NH" required>
+                                    </div>
+
+                                    <!-- Here we have our final submit button -->
+                                    <button type="submit" class="btn btn-default" id="run-search">
+                                        <i class="fa fa-search"></i> Search</button>
+                                    <button class="btn btn-default" id="clear-all">
+                                        <i class="fa fa-trash"></i> Clear Results</button>
+
+                                </form>
                             </div>
 
                         </div>
@@ -106,10 +115,10 @@
                 </div> <!-- col-md-6 -->
                 <div class="col-sm-6">
                     <div class="card">
-                        
+
                         <div class="card-body">
                             <div class="card">
-                                <h2>And what do we watch?</h2>
+                                <h2> What do we watch?? </h2>
                                 <img id="moviePic"
                                     src="https://images.unsplash.com/photo-1507924538820-ede94a04019d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80   "
                                     class="card-img-top" alt="picture of the movie">
@@ -123,7 +132,7 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title"> What to watch? </h4>                           
+                                                <h4 class="modal-title"> What to watch? </h4>
                                                 <form>
                                                     <select id="number-of-movies" class="form-control form-control-sm">
                                                         <option>Choose # of movies to return (default: 5)</option>
