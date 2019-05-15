@@ -6,20 +6,24 @@ body {
 #moviePic {
     max-width: 100%;
     max-height: auto;
+    border-radius: 5px;
 }
 
 #dinnerPic{
     max-width: 100%;
     max-height: auto;
+    border-radius: 5px;
 }
 
 p {
-    color: white;
+    color: rgb(184,27,76);
 }
 
 h2 {
-    color: white;
+    color: rgb(184,27,76);
     text-align: center;
+    background-color: rgb(76,192,253);
+    padding: 0px 0px 10px 0px;
 }
 
 .jumbotron2{
@@ -38,16 +42,21 @@ h2 {
 }
 
 #logo {
-    max-width: 15%;
+    max-width: 35%;
     margin-left: auto;
     margin-right: auto;
     padding: 1%;
 }
 .jumbotron1 {
     text-align: center;
-    background-image: url("https://designshack.net/wp-content/uploads/background-textures.png");
+    background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimage.freepik.com%2Ffree-vector%2Fblue-geometric-abstract-chaotic-triangle-pattern-background-mosaic-vector-graphic-design_1164-1491.jpg");
     background-attachment: fixed;
     margin-top: -200px;
+    border-radius: 5px;
+}
+
+.jumbotron1 img {
+    border-radius: 5px;
 }
 
 /* .jumbotron1 img {
@@ -55,13 +64,18 @@ h2 {
 } */
 
 .jumbotron1 p {
-    color: white;
+    color: navy;
     font-size: 1.5em;
+    background-color: rgb(184,27,76);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 12.5% 0px 12.5%;
+    font-weight: bold;
    
 }
 
 .card {
-    background-image: url("https://designshack.net/wp-content/uploads/background-textures.png");
+    background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimage.freepik.com%2Ffree-vector%2Fblue-geometric-abstract-chaotic-triangle-pattern-background-mosaic-vector-graphic-design_1164-1491.jpg");
     background-attachment: fixed;
 }
 
@@ -79,3 +93,32 @@ footer {
 .modal {
     padding: 10%;
 }
+
+#date-night {
+    width: 75%;
+}
+
+.match-info {
+    display: inline-block;
+    background-color: rgb(184,27,76);
+    margin: 20px;
+    border-radius: 5px;
+    padding: 8px 15px 8px 15px;
+    color: navy;
+}
+
+.match-info img {
+    border-radius: 5px;
+    padding: 0px 8px 8px 0px;
+}
+
+.match-info a {
+    color: navy;
+}
+
+.btn-primary {
+    color: rgb(184,27,76);
+    font-weight: bold;
+    background-color: rgb(76,192,253);
+}
+
