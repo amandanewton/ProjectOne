@@ -50,9 +50,9 @@ h2 {
     margin-top: -200px;
 }
 
-/* .jumbotron1 img {
-    max-height: 450px;
-} */
+.container1 img {
+    max-height: 50%;
+}
 
 .jumbotron1 p {
     color: white;
@@ -60,9 +60,14 @@ h2 {
    
 }
 
+
 .card {
     background-image: url("https://designshack.net/wp-content/uploads/background-textures.png");
     background-attachment: fixed;
+}
+
+.card h2 {
+    font-family: 'Monoton', cursive;
 }
 
 .anchor {
