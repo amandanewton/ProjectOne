@@ -50,14 +50,16 @@ h2 {
     margin-top: -200px;
 }
 
-.container1 img {
-    max-height: 50%;
-}
-
 .jumbotron1 p {
+    font-family: 'Inika', serif;
     color: white;
     font-size: 1.5em;
-   
+    margin-top: 1%;
+}
+
+.responsive {
+    width: 90%;
+    height: auto;
 }
 
 
