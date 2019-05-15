@@ -20,9 +20,9 @@ p {
 }
 
 h2 {
-    color: rgb(184,27,76);
+    color: #e6e600;
     text-align: center;
-    background-color: rgb(76,192,253);
+    
     padding: 0px 0px 10px 0px;
 }
 
@@ -47,30 +47,32 @@ h2 {
     margin-right: auto;
     padding: 1%;
 }
+
+.dateNightImgContainer {
+    opacity: .6;
+}
 .jumbotron1 {
     text-align: center;
-    background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimage.freepik.com%2Ffree-vector%2Fblue-geometric-abstract-chaotic-triangle-pattern-background-mosaic-vector-graphic-design_1164-1491.jpg");
+    background-image: url("http://pluspng.com/img-png/moon-and-star-png-hd-flying-through-dense-clouds-at-night-with-beautiful-full-moon-and-twinkling-stars-in-the-background-seamless-looping-motion-backdrop-full-hd-1920-x-1920.png");
     background-attachment: fixed;
     margin-top: -200px;
     border-radius: 5px;
+    border: solid 3px white;
 }
 
 .jumbotron1 img {
     border-radius: 5px;
+    border: 3px dotted white;
 }
 
 .jumbotron1 p {
-    color: navy;
-    font-size: 1.5em;
-    background-color: rgb(184,27,76);
+    color: #e6e600;
+    font-size: 2.5em;
+    font-weight: bold;
     border-radius: 5px;
     padding: 10px;
     margin: 10px 12.5% 0px 12.5%;
-    font-weight: bold;
-   
-    font-family: 'Inika', serif;
-    color: white;
-    font-size: 1.5em;
+    font-family: 'Codystar', cursive;
     margin-top: 1%;
 }
 
@@ -81,7 +83,7 @@ h2 {
 
 
 .card {
-    background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimage.freepik.com%2Ffree-vector%2Fblue-geometric-abstract-chaotic-triangle-pattern-background-mosaic-vector-graphic-design_1164-1491.jpg");
+    background-image: url("https://live.staticflickr.com/4602/40409544702_7347d99bd8_b.jpg");
     background-attachment: fixed;
 }
 
@@ -114,12 +116,14 @@ footer {
     margin: 20px;
     border-radius: 5px;
     padding: 8px 15px 8px 15px;
-    color: navy;
+    color: white;
+    border: white 2px;
 }
 
 .match-info img {
     border-radius: 5px;
     padding: 0px 8px 8px 0px;
+    border: solid white 1px;
 }
 
 .match-info a {
@@ -127,8 +131,18 @@ footer {
 }
 
 .btn-primary {
-    color: rgb(184,27,76);
+    color: white;
     font-weight: bold;
-    background-color: rgb(76,192,253);
+    background-color: rgb(184,27,76);
 }
 
+#run-search, #clear-all {
+    color: white;
+    font-weight: bold;
+    background-color: rgb(184,27,76);
+}
+
+.form-group {
+    background-color: rgb(184,27,76);
+    color: white;
+}
