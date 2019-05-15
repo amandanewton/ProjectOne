@@ -3,9 +3,14 @@ body {
     background-image: url("https://designshack.net/wp-content/uploads/background-textures.png");
 }
 
-img {
+#moviePic {
     max-width: 100%;
-    max-height: 600px;
+    max-height: auto;
+}
+
+#dinnerPic{
+    max-width: 100%;
+    max-height: auto;
 }
 
 p {
@@ -16,15 +21,43 @@ h2 {
     color: white;
     text-align: center;
 }
-.jumbotron {
+
+.jumbotron2{
+    position: relative !important;
+    padding:10px !important;
+    /* margin-top:50px !important; */
+    /* margin-top: 23px !important; */
+    text-align:center !important;
+    margin-bottom: 0 !important;
+    color: white;
+    background-color: rgba(0, 0, 0, .01);  
+}
+
+#text1 {
+    font-family: 'Monoton', cursive;
+}
+
+#logo {
+    max-width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1%;
+}
+.jumbotron1 {
     text-align: center;
     background-image: url("https://designshack.net/wp-content/uploads/background-textures.png");
     background-attachment: fixed;
+    margin-top: -200px;
 }
 
-.jumbotron p {
+/* .jumbotron1 img {
+    max-height: 450px;
+} */
+
+.jumbotron1 p {
     color: white;
     font-size: 1.5em;
+   
 }
 
 .card {
@@ -41,4 +74,8 @@ h2 {
 
 footer {
     margin-top: 100px;
+}
+
+.modal {
+    padding: 10%;
 }
