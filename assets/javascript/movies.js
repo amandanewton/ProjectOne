@@ -84,17 +84,75 @@ $.ajax (
 })
 }
 
-function findStreamingMovies(numOfMoviesChoice) {
+function findStreamingMovies(numOfMoviesChoice, genreChoice) {
 
 $("#movie-results").empty();
+randomMovieTitles = [];
+randomMovieObjects = [];
 
-// Converts the string passed from the option into an integer
+// Converts the string passed from the html form into integer
 numOfMoviesChoice = parseInt(numOfMoviesChoice);
 
-let randomPage = "&page=" + Math.floor(Math.random()* 235 + 1);
-let queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=ababaad76d9803e8be9e6860ddca4c64&language=en-US&include_adult=false&include_video=false" + randomPage + "&primary_release_date.gte=1995-01-01&vote_count.gte=150&with_original_language=en"
+// Converts string passed from html form into integer only if a non-random genre was chosen
+if (genreChoice === "") {
+    // Do nothing
+} else {
+    genreChoice = parseInt(genreChoice)
+}
 
-console.log(queryURL)
+console.log("genreChoice: " + genreChoice);
+
+// Setting the possible range of randomPage higher or lower depending on if the genre is random or selected
+let randomPage;
+// Widest range if there is no genre chosen (so, the results returned are random)
+if (genreChoice === "") {
+    randomPage = "&page=" + Math.floor(Math.random()* 234 + 1);
+// Customized ranges for each particular genre
+} else if (genreChoice === 28) {
+    randomPage = "&page=" + Math.floor(Math.random()* 56 + 1);
+} else if (genreChoice === 12) {
+    randomPage = "&page=" + Math.floor(Math.random()* 40 + 1);
+} else if (genreChoice === 16) {
+    randomPage = "&page=" + Math.floor(Math.random()* 19 + 1);
+} else if (genreChoice === 35) {
+    randomPage = "&page=" + Math.floor(Math.random()* 84 + 1);
+} else if (genreChoice === 80) {
+    randomPage = "&page=" + Math.floor(Math.random()* 36 + 1);
+} else if (genreChoice === 99) {
+    randomPage = "&page=" + Math.floor(Math.random()* 3 + 1);
+} else if (genreChoice === 18) {
+    randomPage = "&page=" + Math.floor(Math.random()* 104 + 1);
+} else if (genreChoice === 10751) {
+    randomPage = "&page=" + Math.floor(Math.random()* 30 + 1);
+} else if (genreChoice === 14) {
+    randomPage = "&page=" + Math.floor(Math.random()* 25 + 1);
+} else if (genreChoice === 36) {
+    randomPage = "&page=" + Math.floor(Math.random()* 8 + 1);
+} else if (genreChoice === 27) {
+    randomPage = "&page=" + Math.floor(Math.random()* 32 + 1);
+} else if (genreChoice === 10402) {
+    randomPage = "&page=" + Math.floor(Math.random()* 7 + 1);
+} else if (genreChoice === 9648) {
+    randomPage = "&page=" + Math.floor(Math.random()* 24 + 1);
+} else if (genreChoice === 10749) {
+    randomPage = "&page=" + Math.floor(Math.random()* 39 + 1);
+} else if (genreChoice === 878) {
+    randomPage = "&page=" + Math.floor(Math.random()* 30 + 1);
+} else if (genreChoice === 10770) {
+    randomPage = "&page=" + Math.floor(Math.random()* 2 + 1);
+} else if (genreChoice === 53) {
+    randomPage = "&page=" + Math.floor(Math.random()* 73 + 1);
+} else if (genreChoice === 10752) {
+    randomPage = "&page=" + Math.floor(Math.random()* 5 + 1);
+} else if (genreChoice === 37) {
+    randomPage = "&page=" + Math.floor(Math.random()* 2 + 1);
+} else {
+    randomPage = 1;
+}
+
+let queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=ababaad76d9803e8be9e6860ddca4c64&language=en-US&include_adult=false&include_video=false" + randomPage + "&primary_release_date.gte=1995-01-01&vote_count.gte=150&with_original_language=en&with_genres=" + genreChoice;
+
+console.log(queryURL);
 
 $.ajax (
     {url: queryURL,
@@ -174,19 +232,48 @@ $.ajax (
 
         };
 
+        // Calls matchInfo after a delay, to allow for the other AJAX call to complete
+        setTimeout(function() {
+              for (let i = 0; i < randomMovieTitles.length; i++) {
+                matchInfo(randomMovieTitles[i]);
+            }
+        }, 750);
+
     });
 
 };
 
-function findMoviesInTheaters(numOfMoviesChoice) {
+function findMoviesInTheaters(numOfMoviesChoice, genreChoice) {
 
 $("#movie-results").empty();
+randomMovieTitles = [];
+randomMovieObjects = [];
 
-// Converts the string passed from the option into an integer
+// Converts the strings passed from the html form into integers
 numOfMoviesChoice = parseInt(numOfMoviesChoice);
 
-let randomPage = Math.floor(Math.random()*2 + 1);
-let queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=ababaad76d9803e8be9e6860ddca4c64&language=en-US&include_adult=false&include_video=false&with_release_type=3|2&region=US&page=" + randomPage + "&primary_release_year=2019&vote_count.gte=100"
+// Converts string passed from html form into integer only if a non-random genre was chosen
+if (genreChoice === "") {
+    // Do nothing
+} else {
+    genreChoice = parseInt(genreChoice)
+}
+
+console.log("genreChoice parsed: " + genreChoice);
+
+// Setting the possible range of randomPage higher or lower depending on if the genre is random or selected
+let randomPage;
+// Widest range if there is no genre chosen (so, the results returned are somewhat random)
+if (genreChoice === "") {
+    randomPage = "&page=" + Math.floor(Math.random()* 2 + 1);
+// Restrict to one page if there is a genre chosen (to ensure that a real page is returned)
+} else {
+    randomPage = "&page=" + 1;
+}
+
+let queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=ababaad76d9803e8be9e6860ddca4c64&language=en-US&include_adult=false&include_video=false&with_release_type=3|2&region=US&page=" + randomPage + "&primary_release_year=2019&vote_count.gte=100&with_genres=" + genreChoice;
+
+console.log(queryURL);
 
 $.ajax (
     {url: queryURL,
@@ -209,9 +296,7 @@ $.ajax (
             randomArrayStart = 0; // I de-randomize this number in case there aren't 20 full results
         } 
 
-        console.log("randomArrayStart: " + randomArrayStart)
         for (i=randomArrayStart; i < (randomArrayStart + numOfMoviesChoice); i++) {
-            console.log("looping");
             // The key variable 
             movieTitle = response.results[i].original_title
 
@@ -259,26 +344,22 @@ $.ajax (
                    imdbRatingDiv.attr("imdb-rating", movieTitle);
                    newDiv.append(imdbRatingDiv);
 
-                   let checkStreamingDiv = $("<div>");
-                   checkStreamingDiv.attr("check-streaming", movieTitle);
-                   newDiv.append(checkStreamingDiv);
-
             $("#movie-results").append(newDiv);
 
         };
 
-    });
+        // Calls matchInfo after a delay, to allow for the other AJAX call to complete
+        setTimeout(function() {
+            for (let i = 0; i < randomMovieTitles.length; i++) {
+                matchInfo(randomMovieTitles[i]);
+            }
+        }, 750);
 
+    });
 
 };
 
-// Match TMDB with OMDB data when image poster is clicked generate justwatch.com link
-$(document.body).on("click", ".match-info", function() {
-    movieTitle = $(this).data("movie-title");
-    matchInfo(movieTitle);
-})
-
-// Pull random JSON from TMDB on click
+// Pull JSON from TMDB on click
 $("#pick-movies").on("click", function (event) {
     event.preventDefault(); // This is necessary to prevent page refresh
     
@@ -290,9 +371,9 @@ $("#pick-movies").on("click", function (event) {
     console.log("genreChoice: " + genreChoice);
 
     if (document.getElementById("streaming").checked) {
-        findStreamingMovies(numOfMoviesChoice);
+        findStreamingMovies(numOfMoviesChoice, genreChoice);
     } else {
-        findMoviesInTheaters(numOfMoviesChoice);
+        findMoviesInTheaters(numOfMoviesChoice, genreChoice);
     };
     
 })
