@@ -17,6 +17,8 @@ const database = firebase.database();
 let randomMovieTitles = [];
 let randomMovieObjects = [];
 let isLinked = false;
+let ranOutOfMovies = false;
+let thereAreNoMovies = false;
 
 // Builds a link to justwatch.com
 function linkToJustWatch(movieTitle) {
@@ -89,6 +91,8 @@ function findStreamingMovies(numOfMoviesChoice, genreChoice) {
 $("#movie-results").empty();
 randomMovieTitles = [];
 randomMovieObjects = [];
+ranOutOfMovies = false;
+thereAreNoMovies = false;
 
 // Converts the string passed from the html form into integer
 numOfMoviesChoice = parseInt(numOfMoviesChoice);
@@ -107,7 +111,7 @@ let randomPage;
 // Widest range if there is no genre chosen (so, the results returned are random)
 if (genreChoice === "") {
     randomPage = "&page=" + Math.floor(Math.random()* 234 + 1);
-// Customized ranges for each particular genre
+// Customized ranges for each particular genre. I checked how many pages are in each genre, given my search criteria
 } else if (genreChoice === 28) {
     randomPage = "&page=" + Math.floor(Math.random()* 56 + 1);
 } else if (genreChoice === 12) {
@@ -159,86 +163,115 @@ $.ajax (
     method: "GET"})
     .then(function (response) {
         
-        //randomizing which of the 20 results are displayed, depending on how many movies are requested
+        // Randomizing which of the 20 results are displayed, depending on how many movies are requested
+        let numOfResults = response.results.length;
         let randomArrayStart;
-        if (numOfMoviesChoice === 1) {
-            randomArrayStart = Math.floor(Math.random()*19 + 1);
-        }
-        else if (numOfMoviesChoice === 3) {
-            randomArrayStart = Math.floor(Math.random()*17 + 1);
-        }
-        else if (numOfMoviesChoice === 5) {
-            randomArrayStart = Math.floor(Math.random()*15 + 1);
-        }
-        else if (numOfMoviesChoice === 10) {
-            randomArrayStart = Math.floor(Math.random()*10 + 1);
-        } 
 
-        for (i=randomArrayStart; i < (randomArrayStart + numOfMoviesChoice); i++) {
-            
-            // The key variable 
-            movieTitle = response.results[i].original_title
+        if (numOfResults === 0 ) {
+            // Alert user below if there are no movies under that search criteria
+            thereAreNoMovies = true;
+        } else if (numOfResults < 3 && numOfMoviesChoice >= 3 || numOfResults < 5 && numOfMoviesChoice >= 5 || numOfResults < 10 && numOfMoviesChoice === 10) {
+            // In case the number of movies requested is greater than the number of movies returned in the response, just display all the movies
+            randomArrayStart = 0;
+            numOfMoviesChoice = numOfResults;
+            ranOutOfMovies = true;
+        } else {
+            // Randomizing which of the results are displayed, depending on how many movies are requested
+            randomArrayStart = Math.floor(Math.random()*(numOfResults - numOfMoviesChoice + 1));
+        }
 
-            // Starts other ajax call
-            randomMovieTitles.push(movieTitle);
-            getMoreInfo(movieTitle);
-            
-            // Create wrapper for all current and future info about each movie
-            let newDiv = $("<div>");
-            newDiv.addClass("match-info"); // Allows whole div to be clicked via event delegation below
-            newDiv.attr("data-movie-title", movieTitle) // Allows the whole div to be identified later
-            newDiv.css("display", "inline-block");
-
-            
-                // Grabbing title and poster information from TMDB, in this ajax call
-                let newTitle = $("<h5>");
-                newTitle.text(movieTitle);
-                                    
-                let newPoster = $("<img>");
-                newPoster.attr("src", "https://image.tmdb.org/t/p/" + "/w185" + response.results[i].poster_path);
-                newPoster.attr("just-watch-link", "");
-                newPoster.attr("poster", movieTitle);
-                newPoster.css("float", "left");
+        if (thereAreNoMovies === false) {
+            for (i=randomArrayStart; i < (randomArrayStart + numOfMoviesChoice); i++) {
                 
-                newDiv.append(newTitle);
-                newDiv.append(newPoster);
+                // The key variable 
+                movieTitle = response.results[i].original_title
+    
+                // Starts other ajax call
+                randomMovieTitles.push(movieTitle);
+                getMoreInfo(movieTitle);
+                
+                // Create wrapper for all current and future info about each movie
+                let newDiv = $("<div>");
+                newDiv.addClass("match-info"); // Allows whole div to be clicked via event delegation below
+                newDiv.attr("data-movie-title", movieTitle) // Allows the whole div to be identified later
+                newDiv.css("display", "inline-block");
+    
+                
+                    // Grabbing title and poster information from TMDB, in this ajax call
+                    let newTitle = $("<h5>");
+                    newTitle.text(movieTitle);
+                                        
+                    let newPoster = $("<img>");
+                    newPoster.attr("src", "https://image.tmdb.org/t/p/" + "/w185" + response.results[i].poster_path);
+                    newPoster.attr("just-watch-link", "");
+                    newPoster.attr("poster", movieTitle);
+                    newPoster.css("float", "left");
+                    
+                    newDiv.append(newTitle);
+                    newDiv.append(newPoster);
+    
+                       // Creating divs for information to be added later from the OMDB ajax call
+                       let plotDiv = $("<div>");
+                       plotDiv.attr("plot", movieTitle);
+                       newDiv.append(plotDiv);
+    
+                       let genreDiv = $("<div>");
+                       genreDiv.attr("genre", movieTitle);
+                       newDiv.append(genreDiv);
+    
+                       let ratingDiv = $("<div>");
+                       ratingDiv.attr("rating", movieTitle);
+                       newDiv.append(ratingDiv);
+    
+                       let release_dateDiv = $("<div>");
+                       release_dateDiv.attr("release-date", movieTitle);
+                       newDiv.append(release_dateDiv);
+                   
+                       let imdbRatingDiv = $("<div>");
+                       imdbRatingDiv.attr("imdb-rating", movieTitle);
+                       newDiv.append(imdbRatingDiv);
+    
+                       let checkStreamingDiv = $("<div>");
+                       checkStreamingDiv.attr("check-streaming", movieTitle);
+                       newDiv.append(checkStreamingDiv);
+    
+                $("#movie-results").append(newDiv);
+            };
+        }
 
-                   // Creating divs for information to be added later from the OMDB ajax call
-                   let plotDiv = $("<div>");
-                   plotDiv.attr("plot", movieTitle);
-                   newDiv.append(plotDiv);
-
-                   let genreDiv = $("<div>");
-                   genreDiv.attr("genre", movieTitle);
-                   newDiv.append(genreDiv);
-
-                   let ratingDiv = $("<div>");
-                   ratingDiv.attr("rating", movieTitle);
-                   newDiv.append(ratingDiv);
-
-                   let release_dateDiv = $("<div>");
-                   release_dateDiv.attr("release-date", movieTitle);
-                   newDiv.append(release_dateDiv);
-               
-                   let imdbRatingDiv = $("<div>");
-                   imdbRatingDiv.attr("imdb-rating", movieTitle);
-                   newDiv.append(imdbRatingDiv);
-
-                   let checkStreamingDiv = $("<div>");
-                   checkStreamingDiv.attr("check-streaming", movieTitle);
-                   newDiv.append(checkStreamingDiv);
-
+        if (thereAreNoMovies === true) {
+            let newDiv = $("<div>");
+            let p = $("<p>")
+            p.html('<b>Search returned no results! Try different parameters.</b>');
+            newDiv.append(p);
             $("#movie-results").append(newDiv);
+        } else {
+            // Only run these code blocks if there are results to process
+            // Show user that there are no more movies to display
+            if (ranOutOfMovies === true) {
+                let newDiv = $("<div>");
+                newDiv.addClass("match-info"); 
+                newDiv.css("display", "block");
+                newDiv.css("text-align", "center");
+                
+                    let porkyDiv = $("<div>")
+                    porkyDiv.html('<b>You requested more movies than results!</b>');
+                    newDiv.append(porkyDiv);
 
-        };
-
-        // Calls matchInfo after a delay, to allow for the other AJAX call to complete
-        setTimeout(function() {
-              for (let i = 0; i < randomMovieTitles.length; i++) {
-                matchInfo(randomMovieTitles[i]);
+                    porkyPig = $("<img>")
+                    porkyPig.attr("src", "https://thumbs.gfycat.com/AdorableGrizzledAdmiralbutterfly-max-1mb.gif");
+                    porkyPig.css("width", "250px");
+                    $(newDiv).append(porkyPig);
+                                        
+                $("#movie-results").append(newDiv);
             }
-        }, 750);
-
+            // Calls matchInfo after a delay, to allow for the other AJAX call to complete
+            setTimeout(function() {
+                  for (let i = 0; i < randomMovieTitles.length; i++) {
+                    matchInfo(randomMovieTitles[i]);
+                }
+            }, 1000);
+        }
     });
 
 };
@@ -248,6 +281,8 @@ function findMoviesInTheaters(numOfMoviesChoice, genreChoice) {
 $("#movie-results").empty();
 randomMovieTitles = [];
 randomMovieObjects = [];
+ranOutOfMovies = false;
+thereAreNoMovies = false;
 
 // Converts the strings passed from the html form into integers
 numOfMoviesChoice = parseInt(numOfMoviesChoice);
@@ -258,8 +293,6 @@ if (genreChoice === "") {
 } else {
     genreChoice = parseInt(genreChoice)
 }
-
-console.log("genreChoice parsed: " + genreChoice);
 
 // Setting the possible range of randomPage higher or lower depending on if the genre is random or selected
 let randomPage;
@@ -281,80 +314,111 @@ $.ajax (
     .then(function (response) {
         console.log(response);
         
-        //randomizing which of the 20 results are displayed, depending on how many movies are requested
+        // Randomizing which of the 20 results are displayed, depending on how many movies are requested
+        let numOfResults = response.results.length;
         let randomArrayStart;
-        if (numOfMoviesChoice === 1) {
-            randomArrayStart = Math.floor(Math.random()*19 + 1);
-        }
-        else if (numOfMoviesChoice === 3) {
-            randomArrayStart = Math.floor(Math.random()*17 + 1);
-        }
-        else if (numOfMoviesChoice === 5) {
-            randomArrayStart = Math.floor(Math.random()*15 + 1);
-        }
-        else if (numOfMoviesChoice === 10) {
-            randomArrayStart = 0; // I de-randomize this number in case there aren't 20 full results
-        } 
 
-        for (i=randomArrayStart; i < (randomArrayStart + numOfMoviesChoice); i++) {
-            // The key variable 
-            movieTitle = response.results[i].original_title
-
-            // Starts other ajax call
-            randomMovieTitles.push(movieTitle);
-            getMoreInfo(movieTitle);
-            
-            // Create wrapper for all current and future info about each movie
-            let newDiv = $("<div>");
-            newDiv.addClass("match-info"); // Allows whole div to be clicked via event delegation below
-            newDiv.attr("data-movie-title", movieTitle) // Allows the whole div to be identified later
-            newDiv.css("display", "inline-block");
-            
-                // Grabbing title and poster information from TMDB, in this ajax call
-                let newTitle = $("<h5>");
-                newTitle.text(movieTitle);
-                                    
-                let newPoster = $("<img>");
-                newPoster.attr("src", "https://image.tmdb.org/t/p/" + "/w185" + response.results[i].poster_path);
-                newPoster.attr("just-watch-link", "");
-                newPoster.attr("poster", movieTitle);
-                newPoster.css("float", "left");
+        if (numOfResults === 0 ) {
+            // Alert user below if there are no movies under that search criteria
+            thereAreNoMovies = true;
+        } else if (numOfResults < 3 && numOfMoviesChoice >= 3 || numOfResults < 5 && numOfMoviesChoice >= 5 || numOfResults < 10 && numOfMoviesChoice === 10) {
+            // In case the number of movies requested is greater than the number of movies returned in the response, just display all the movies
+            randomArrayStart = 0;
+            numOfMoviesChoice = numOfResults;
+            ranOutOfMovies = true;
+        } else {
+            // Randomizing which of the results are displayed, depending on how many movies are requested
+            randomArrayStart = Math.floor(Math.random()*(numOfResults - numOfMoviesChoice + 1));
+        }
+        
+        // Only run loop to display movies if there ARE movies
+        if (thereAreNoMovies === false) {
+            for (i=randomArrayStart; i < (randomArrayStart + numOfMoviesChoice); i++) {
+                // The key variable 
+                movieTitle = response.results[i].original_title
+    
+                // Starts other ajax call
+                randomMovieTitles.push(movieTitle);
+                getMoreInfo(movieTitle);
                 
-                newDiv.append(newTitle);
-                newDiv.append(newPoster);
-
-                   // Creating divs for information to be added later from the OMDB ajax call
-                   let plotDiv = $("<div>");
-                   plotDiv.attr("plot", movieTitle);
-                   newDiv.append(plotDiv);
-
-                   let genreDiv = $("<div>");
-                   genreDiv.attr("genre", movieTitle);
-                   newDiv.append(genreDiv);
-
-                   let ratingDiv = $("<div>");
-                   ratingDiv.attr("rating", movieTitle);
-                   newDiv.append(ratingDiv);
-
-                   let release_dateDiv = $("<div>");
-                   release_dateDiv.attr("release-date", movieTitle);
-                   newDiv.append(release_dateDiv);
-               
-                   let imdbRatingDiv = $("<div>");
-                   imdbRatingDiv.attr("imdb-rating", movieTitle);
-                   newDiv.append(imdbRatingDiv);
-
+                // Create wrapper for all current and future info about each movie
+                let newDiv = $("<div>");
+                newDiv.addClass("match-info"); // Allows whole div to be clicked via event delegation below
+                newDiv.attr("data-movie-title", movieTitle) // Allows the whole div to be identified later
+                newDiv.css("display", "inline-block");
+                
+                    // Grabbing title and poster information from TMDB, in this ajax call
+                    let newTitle = $("<h5>");
+                    newTitle.text(movieTitle);
+                                        
+                    let newPoster = $("<img>");
+                    newPoster.attr("src", "https://image.tmdb.org/t/p/" + "/w185" + response.results[i].poster_path);
+                    newPoster.attr("just-watch-link", "");
+                    newPoster.attr("poster", movieTitle);
+                    newPoster.css("float", "left");
+                    
+                    newDiv.append(newTitle);
+                    newDiv.append(newPoster);
+    
+                       // Creating divs for information to be added later from the OMDB ajax call
+                       let plotDiv = $("<div>");
+                       plotDiv.attr("plot", movieTitle);
+                       newDiv.append(plotDiv);
+    
+                       let genreDiv = $("<div>");
+                       genreDiv.attr("genre", movieTitle);
+                       newDiv.append(genreDiv);
+    
+                       let ratingDiv = $("<div>");
+                       ratingDiv.attr("rating", movieTitle);
+                       newDiv.append(ratingDiv);
+    
+                       let release_dateDiv = $("<div>");
+                       release_dateDiv.attr("release-date", movieTitle);
+                       newDiv.append(release_dateDiv);
+                   
+                       let imdbRatingDiv = $("<div>");
+                       imdbRatingDiv.attr("imdb-rating", movieTitle);
+                       newDiv.append(imdbRatingDiv);
+    
+                $("#movie-results").append(newDiv);
+            };
+        }
+        
+        if (thereAreNoMovies === true) {
+            let newDiv = $("<div>");
+            let p = $("<p>")
+            p.html('<b>Search returned no results! Try different parameters.</b>');
+            newDiv.append(p);
             $("#movie-results").append(newDiv);
+        } else {
+            // Only run these code blocks if there are results to process
+            // Show user that there are no more movies to display
+            if (ranOutOfMovies === true) {
+                let newDiv = $("<div>");
+                newDiv.addClass("match-info"); 
+                newDiv.css("display", "block");
+                newDiv.css("text-align", "center");
+                
+                    let porkyDiv = $("<div>")
+                    porkyDiv.html('<b>You requested more movies than results!</b>');
+                    newDiv.append(porkyDiv);
 
-        };
-
-        // Calls matchInfo after a delay, to allow for the other AJAX call to complete
-        setTimeout(function() {
-            for (let i = 0; i < randomMovieTitles.length; i++) {
-                matchInfo(randomMovieTitles[i]);
+                    porkyPig = $("<img>")
+                    porkyPig.attr("src", "https://thumbs.gfycat.com/AdorableGrizzledAdmiralbutterfly-max-1mb.gif");
+                    porkyPig.css("width", "250px");
+                    $(newDiv).append(porkyPig);
+                                        
+                $("#movie-results").append(newDiv);
             }
-        }, 750);
-
+    
+            // Calls matchInfo after a delay, to allow for the other AJAX call to complete
+            setTimeout(function() {
+                for (let i = 0; i < randomMovieTitles.length; i++) {
+                    matchInfo(randomMovieTitles[i]);
+                }
+            }, 1000);
+        }
     });
 
 };
@@ -368,7 +432,6 @@ $("#pick-movies").on("click", function (event) {
     
     let genreList = document.getElementById("genre");
     let genreChoice = genreList.options[genreList.selectedIndex].value;
-    console.log("genreChoice: " + genreChoice);
 
     if (document.getElementById("streaming").checked) {
         findStreamingMovies(numOfMoviesChoice, genreChoice);
