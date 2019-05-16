@@ -7,6 +7,7 @@ body {
     max-width: 100%;
     max-height: auto;
     border-radius: 5px;
+    margin: 0px 0px 8px 0px;
 }
 
 #dinnerPic{
@@ -42,10 +43,9 @@ h2 {
 }
 
 #logo {
-    max-width: 35%;
+    max-width: 26.5%;
     margin-left: auto;
     margin-right: auto;
-    padding: 1%;
 }
 
 .dateNightImgContainer {
@@ -113,7 +113,7 @@ footer {
 .match-info {
     display: inline-block;
     background-color: rgb(184,27,76);
-    margin: 20px;
+    margin: 5px 0px 5px 0px;
     border-radius: 5px;
     padding: 8px 15px 8px 15px;
     color: white;
@@ -122,6 +122,8 @@ footer {
 
 .match-info img {
     border-radius: 5px;
+    margin: 0px 8px 8px 0px;
+    max-height: 250px;
     padding: 0px 8px 8px 0px;
     border: solid white 1px;
 }
