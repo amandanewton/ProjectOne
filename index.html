@@ -72,42 +72,83 @@
                                 <img class="pic" id="dinnerPic"
                                     src="https://images.unsplash.com/photo-1467453678174-768ec283a940?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1928&q=80"
                                     class="card-img-top" alt="picture of food">
-                                <!-- Here we create an HTML Form for handling the inputs-->
-                                <form role="form">
 
-                                    <!-- Here we create the text box for capturing the search term-->
-                                    <div class="form-group">
-                                        <label for="search">Search Term:</label>
-                                        <input type="text" class="form-control" id="search-term"
-                                            placeholder="Tacos, Pizza, Sports Bar, etc." required>
-                                    </div>
+<!-- Row for Searching Yelp -->
+<div class="row">
+    <div class="col-sm-12">
+      <br>
+      <!-- First card is for handling the search parameters -->
+      <div class="card">
+        <div class="card-header">
+          <strong>
+            <i class="fa fa-list-alt"></i> Search Parameters</strong>
+        </div>
+        <div class="card-body">
 
-                                    <!-- Here we capture the number of records that the user wants to retrieve  -->
-                                    <div class="form-group">
-                                        <label for="pwd">Number of Records to Retrieve:</label>
-                                        <select id="restaurant-count" class="custom-select"
-                                            aria-labelledby="dropdownMenuButton">
-                                            <option selected value="1">1</option>
-                                            <!-- Setting the option for 5 as default -->
-                                            <option value="5" selected>5</option>
-                                            <option value="10">10</option>
-                                        </select>
-                                    </div>
+          <!-- Here we create an HTML Form for handling the inputs-->
+          <form role="form">
 
-                                    <!-- Here we capture the Location Parameter-->
-                                    <div class="form-group">
-                                        <label for="search">Location (City, State):</label>
-                                        <input type="text" class="form-control" id="location-term"
-                                            placeholder="Portsmouth, NH" required>
-                                    </div>
+            <!-- Here we create the text box for capturing the search term-->
+            <div class="form-group">
+              <label for="search">Search Term:</label>
+              <input type="text" class="form-control" id="search-term" placeholder="Tacos, Pizza, Sports Bar, etc." required="true">
+            </div>
 
-                                    <!-- Here we have our final submit button -->
-                                    <button type="submit" class="btn btn-default" id="run-search">
-                                        <i class="fa fa-search"></i> Search</button>
-                                    <button class="btn btn-default" id="clear-all">
-                                        <i class="fa fa-trash"></i> Clear Results</button>
+            <!-- Here we capture the number of records that the user wants to retrieve  -->
+            <div class="form-group">
+              <label for="pwd">Number of Records to Retrieve:</label>
+              <select id="restaurant-count" class="custom-select" aria-labelledby="dropdownMenuButton">
+                <option selected value="1">1</option>
+                <option selected value="3">3</option>
+                <!-- Setting the option for 5 as default -->
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+              </select>
+            </div>
 
-                                </form>
+            <!-- Here we capture the Location Parameter-->
+            <div class="form-group">
+              <label for="search">Location (City, State):</label>
+              <input type="text" class="form-control" id="location-term" placeholder="Portsmouth, NH" required="true">
+            </div>
+
+            <!-- Here we have our final submit button -->
+            <button type="submit" class="btn btn-default" id="run-search">
+              <i class="fa fa-search"></i> Search</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- This row will handle all of the retrieved restaurants -->
+  <div class="row">
+    <div class="col-sm-12">
+      <br>
+
+      <!-- This card will initially be made up of a card and wells for each of the restaurants retrieved -->
+      <div class="card">
+
+        <!-- card Heading for the retrieved restaurants box -->
+        <div class="card-header">
+          <strong>
+            <i class="fa fa-table"></i> Top Restaurants</strong>
+        </div>
+
+        <!-- This main card will hold each of the resulting restaurants -->
+        <div class="card-body" id="restaurant-section">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+
                             </div>
 
                         </div>

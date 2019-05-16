@@ -79,11 +79,10 @@ h2 {
     height: auto;
 }
 
-
-.card {
+/* .card {
     background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimage.freepik.com%2Ffree-vector%2Fblue-geometric-abstract-chaotic-triangle-pattern-background-mosaic-vector-graphic-design_1164-1491.jpg");
     background-attachment: fixed;
-}
+} */
 
 .card h2 {
     font-family: 'Monoton', cursive;
@@ -132,3 +131,10 @@ footer {
     background-color: rgb(76,192,253);
 }
 
+.card-body a {
+    word-break: break-all;
+  }
+
+  .restaurantHeadline {
+    line-height: 1.5;
+  }
