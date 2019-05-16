@@ -91,7 +91,7 @@
           <form role="form">
 
             <!-- Here we create the text box for capturing the search term-->
-            <div class="form-group">
+            <div class="form-group" data-toggle="validator">
               <label for="search">Search Term:</label>
               <input type="text" class="form-control" id="search-term" placeholder="Tacos, Pizza, Sports Bar, etc." required="true">
             </div>
@@ -111,7 +111,7 @@
             <!-- Here we capture the Location Parameter-->
             <div class="form-group">
               <label for="search">Location (City, State):</label>
-              <input type="text" class="form-control" id="location-term" placeholder="Portsmouth, NH" required="true">
+              <input type="text" class="form-control" id="location-term" placeholder="Required (Ex: Portsmouth, NH)" required>
             </div>
 
             <!-- Here we have our final submit button -->
