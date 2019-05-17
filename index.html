@@ -19,18 +19,38 @@
     <!-- jQuery link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- jQuery UI link -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    
+    <script>
+        $(function() {
+            $( "#accordion-yelp" ).accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+        } );
+        $(function() {
+            $( "#accordion-movies" ).accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+        } );
+    </script>
+    
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+    
     <!-- Bootstrap jQuery -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <!-- Is this jQuery different from the earlier one? Or is it redundant? -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <!-- Is this ajax link any different from the previous one? -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> This link conflicts with the jQuery UI accordion--> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
+    
     <!-- External font -->
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
@@ -38,9 +58,9 @@
     <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Inika" rel="stylesheet">
     
-    <!-- Custom style shet -->
-
+    <!-- Custom style sheet -->
     <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="100">
@@ -202,6 +222,9 @@
 
                                             <!-- This main card will hold each of the resulting restaurants -->
                                             <div class="card-body" id="restaurant-section">
+                                                <!-- jQuery UI collapsible panels -->
+                                                <div id="accordion-yelp">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -316,18 +339,23 @@
 
                                             <!-- This main card will hold each of the resulting movies -->
                                             <div class="card-body" id="movie-results">
+
+                                                <!-- jQuery UI collapsible panels -->
+                                                <div id="accordion-movies">
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
 
-
-
+                                
                             </div>
                         </div>
                     </div> <!-- col-md-6-->
                 </div> <!-- card-->
-
+                
 
 
             </div>
@@ -347,7 +375,6 @@
             </nav>
 
             <footer></footer>
-
 
             <!-- local JS file -->
             <script src="assets/javascript/movies.js" async defer></script>

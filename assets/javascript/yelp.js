@@ -54,8 +54,19 @@ function buildQueryURL() {
     // (in addition to clicks). Prevents the page from reloading on form submit.
     event.preventDefault();
 
+    // Update firebase number of searches
+    database.ref().once("value", function (snapshot) {
+        let numOfSearches;
+        numOfSearches = snapshot.val().yelpSearches;
+        numOfSearches++
+        console.log(numOfSearches);
+        database.ref().update({
+            yelpSearches: numOfSearches
+        });
+    });
+
     // Empty the region associated with the restaurants
-    $("#restaurant-section").empty();
+    $("#accordion-yelp").empty();
   
     // Build the query URL for the ajax request to the Yelp API
     var queryURL = buildQueryURL();
@@ -73,29 +84,46 @@ function buildQueryURL() {
     
     // Loops through every result returned and loads requested data (Restaruant Name w/Yelp URL, Image, Rating, Phone)
       for (i=0; i< response.businesses.length; i++) {
+        
+        // Create new entries for the accordion
+        let h3 = $("<h3>");
+        h3.text(response.businesses[i].name);
+        $("#accordion-yelp").append(h3);
+        
+        let newDiv = $("<div>");
+        newDiv.addClass("match-info");
+        newDiv.css("display", "inline-block");
+        
+          let newImage = $("<img>");
+          newImage.attr("src", response.businesses[i].image_url);
+          newImage.css("width", "75%");
+          newImage.css("float", "left");
+          $(newDiv).append(newImage);
+          
+          let newLink = $('<a>',{
+              text: "Website",
+              title: response.businesses[i].name,
+              href: response.businesses[i].url,
+              target: "_blank"
+          });
+          newLink.css("font-weight", "bold");
+          $(newDiv).append(newLink);
 
-        let newLink = $('<a>',{
-          text: response.businesses[i].name,
-          title: response.businesses[i].name,
-          href: response.businesses[i].url,
-          target: "_blank"
-      }).appendTo('#restaurant-section');
-      
-        br = $("<br>");
-        $("#restaurant-section").append(br);
+          let newBreak = $("<br>");
+          $(newDiv).append(newBreak);
+          let newBreak2 = $("<br>");
+          $(newDiv).append(newBreak2);
 
-        newImage = $("<img>");
-        newImage.attr("src", response.businesses[i].image_url);
-        newImage.css("width", "75%");
-        $("#restaurant-section").append(newImage);
+          let newParagraphRating = $("<p>");
+          newParagraphRating.html("<b>Rating:</b> " + response.businesses[i].rating);
+          $(newDiv).append(newParagraphRating);
 
-        newParagraphRating = $("<p>");
-        newParagraphRating.text("Rating: " + response.businesses[i].rating);
-        $("#restaurant-section").append(newParagraphRating);
+          let newParagraphPhone = $("<p>");
+          newParagraphPhone.html("<b>Phone:</b> " + response.businesses[i].display_phone);
+          $(newDiv).append(newParagraphPhone);
 
-        newParagraphPhone = $("<p>");
-        newParagraphPhone.text("Phone: " + response.businesses[i].display_phone);
-        $("#restaurant-section").append(newParagraphPhone);
+      $("#accordion-yelp").append(newDiv);
+      $("#accordion-yelp").accordion("refresh");
       }
     });
   });
