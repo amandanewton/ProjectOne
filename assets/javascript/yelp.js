@@ -1,3 +1,20 @@
+  // FIREBASE
+  // ==========================================================
+  //var firebaseConfig = {
+    //apiKey: "AIzaSyDlI0DiPN75v4F8xJiXW8KXD0O7FydwyOg",
+    //authDomain: "projectone-cbd2c.firebaseapp.com",
+    //databaseURL: "https://projectone-cbd2c.firebaseio.com",
+    //projectId: "projectone-cbd2c",
+    //storageBucket: "projectone-cbd2c.appspot.com",
+    //messagingSenderId: "282583437650",
+    //appId: "1:282583437650:web:eaf7c5591e59000e"
+  //};
+  // Initialize Firebase
+  //firebase.initializeApp(firebaseConfig);
+
+  // FUNCTIONS
+  // ==========================================================
+
 function buildQueryURL() {
     // queryURL is the base of the url we'll use to query the API
     var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?sort_by=best_match";
