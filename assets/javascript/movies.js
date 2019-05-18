@@ -242,6 +242,7 @@ $.ajax (
             let newDiv = $("<div>");
             let p = $("<p>")
             p.html('<b>Search returned no results! Try different parameters.</b>');
+            p.css("color", "white");
             newDiv.append(p);
             $("#accordion-movies").append(newDiv);
         } else {
@@ -254,7 +255,8 @@ $.ajax (
                 newDiv.css("text-align", "center");
                 
                     let porkyDiv = $("<div>")
-                    porkyDiv.html('<b>You requested more movies than results!</b>');
+                    porkyDiv.html('<p><b>You requested more movies than results!</b></p>');
+                    porkyDiv.css("color", "white");
                     newDiv.append(porkyDiv);
 
                     porkyPig = $("<img>")
@@ -388,6 +390,7 @@ $.ajax (
             let newDiv = $("<div>");
             let p = $("<p>")
             p.html('<b>Search returned no results! Try different parameters.</b>');
+            p.css("color", "white");
             newDiv.append(p);
             $("#movie-results").append(newDiv);
         } else {
@@ -400,7 +403,8 @@ $.ajax (
                 newDiv.css("text-align", "center");
                 
                     let porkyDiv = $("<div>")
-                    porkyDiv.html('<b>You requested more movies than results!</b>');
+                    porkyDiv.html('<p><b>You requested more movies than results!</b></p>');
+                    porkyDiv.css("color", "white");
                     newDiv.append(porkyDiv);
 
                     porkyPig = $("<img>")
