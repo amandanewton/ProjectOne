@@ -88,7 +88,7 @@ $.ajax (
 
 function findStreamingMovies(numOfMoviesChoice, genreChoice) {
 
-$("#movie-results").empty();
+$("#accordion-movies").empty();
 randomMovieTitles = [];
 randomMovieObjects = [];
 ranOutOfMovies = false;
@@ -190,24 +190,22 @@ $.ajax (
                 randomMovieTitles.push(movieTitle);
                 getMoreInfo(movieTitle);
                 
-                // Create wrapper for all current and future info about each movie
+                // Create new entries for the accordion
+                let h3 = $("<h3>");
+                h3.text(movieTitle);
+                $("#accordion-movies").append(h3);
+                
                 let newDiv = $("<div>");
                 newDiv.addClass("match-info"); // Allows whole div to be clicked via event delegation below
                 newDiv.attr("data-movie-title", movieTitle) // Allows the whole div to be identified later
                 newDiv.css("display", "inline-block");
     
-                
-                    // Grabbing title and poster information from TMDB, in this ajax call
-                    let newTitle = $("<h5>");
-                    newTitle.text(movieTitle);
-                                        
+                    // Grabbing poster information from TMDB, in this ajax call
                     let newPoster = $("<img>");
                     newPoster.attr("src", "https://image.tmdb.org/t/p/" + "/w185" + response.results[i].poster_path);
                     newPoster.attr("just-watch-link", "");
                     newPoster.attr("poster", movieTitle);
                     newPoster.css("float", "left");
-                    
-                    newDiv.append(newTitle);
                     newDiv.append(newPoster);
     
                        // Creating divs for information to be added later from the OMDB ajax call
@@ -235,7 +233,8 @@ $.ajax (
                        checkStreamingDiv.attr("check-streaming", movieTitle);
                        newDiv.append(checkStreamingDiv);
     
-                $("#movie-results").append(newDiv);
+                $("#accordion-movies").append(newDiv);
+                $("#accordion-movies").accordion("refresh");
             };
         }
 
@@ -244,7 +243,7 @@ $.ajax (
             let p = $("<p>")
             p.html('<b>Search returned no results! Try different parameters.</b>');
             newDiv.append(p);
-            $("#movie-results").append(newDiv);
+            $("#accordion-movies").append(newDiv);
         } else {
             // Only run these code blocks if there are results to process
             // Show user that there are no more movies to display
@@ -263,7 +262,7 @@ $.ajax (
                     porkyPig.css("width", "250px");
                     $(newDiv).append(porkyPig);
                                         
-                $("#movie-results").append(newDiv);
+                $("#accordion-movies").append(newDiv);
             }
             // Calls matchInfo after a delay, to allow for the other AJAX call to complete
             setTimeout(function() {
@@ -278,7 +277,7 @@ $.ajax (
 
 function findMoviesInTheaters(numOfMoviesChoice, genreChoice) {
 
-$("#movie-results").empty();
+$("#accordion-movies").empty();
 randomMovieTitles = [];
 randomMovieObjects = [];
 ranOutOfMovies = false;
@@ -341,23 +340,22 @@ $.ajax (
                 randomMovieTitles.push(movieTitle);
                 getMoreInfo(movieTitle);
                 
-                // Create wrapper for all current and future info about each movie
+                // Create new entries for the accordion
+                let h3 = $("<h3>");
+                h3.text(movieTitle);
+                $("#accordion-movies").append(h3);
+
                 let newDiv = $("<div>");
                 newDiv.addClass("match-info"); // Allows whole div to be clicked via event delegation below
                 newDiv.attr("data-movie-title", movieTitle) // Allows the whole div to be identified later
                 newDiv.css("display", "inline-block");
                 
-                    // Grabbing title and poster information from TMDB, in this ajax call
-                    let newTitle = $("<h5>");
-                    newTitle.text(movieTitle);
-                                        
+                    // Grabbing title information from TMDB, in this ajax call
                     let newPoster = $("<img>");
                     newPoster.attr("src", "https://image.tmdb.org/t/p/" + "/w185" + response.results[i].poster_path);
                     newPoster.attr("just-watch-link", "");
                     newPoster.attr("poster", movieTitle);
                     newPoster.css("float", "left");
-                    
-                    newDiv.append(newTitle);
                     newDiv.append(newPoster);
     
                        // Creating divs for information to be added later from the OMDB ajax call
@@ -381,7 +379,8 @@ $.ajax (
                        imdbRatingDiv.attr("imdb-rating", movieTitle);
                        newDiv.append(imdbRatingDiv);
     
-                $("#movie-results").append(newDiv);
+                $("#accordion-movies").append(newDiv);
+                $("#accordion-movies").accordion("refresh");
             };
         }
         
@@ -426,8 +425,22 @@ $.ajax (
 // Pull JSON from TMDB on click
 $("#pick-movies").on("click", function (event) {
     event.preventDefault(); // This is necessary to prevent page refresh
+<<<<<<< HEAD
     $("#movie-results").show();
     
+=======
+
+    database.ref().once("value", function (snapshot) {
+        let numOfSearches;
+        numOfSearches = snapshot.val().movieSearches;
+        numOfSearches++
+        console.log(numOfSearches);
+        database.ref().update({
+            movieSearches: numOfSearches
+        });
+    });
+
+>>>>>>> 87426b680f8cdfc3773fecd304dc861ad101fad5
     let numOfMoviesList = document.getElementById("number-of-movies");
     let numOfMoviesChoice = numOfMoviesList.options[numOfMoviesList.selectedIndex].value;
     
@@ -440,4 +453,4 @@ $("#pick-movies").on("click", function (event) {
         findMoviesInTheaters(numOfMoviesChoice, genreChoice);
     };
     
-})
+});

@@ -19,18 +19,38 @@
     <!-- jQuery link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- jQuery UI link -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    
+    <script>
+        $(function() {
+            $( "#accordion-yelp" ).accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+        } );
+        $(function() {
+            $( "#accordion-movies" ).accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+        } );
+    </script>
+    
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+    
     <!-- Bootstrap jQuery -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <!-- Is this jQuery different from the earlier one? Or is it redundant? -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <!-- Is this ajax link any different from the previous one? -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> This link conflicts with the jQuery UI accordion--> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
+    
     <!-- External font -->
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
@@ -38,9 +58,9 @@
     <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Inika" rel="stylesheet">
     
-    <!-- Custom style shet -->
-
+    <!-- Custom style sheet -->
     <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="100">
@@ -92,11 +112,68 @@
                                                 <form role="form">
 
                                                     <!-- Here we create the text box for capturing the search term-->
-                                                    <div class="form-group">
-                                                        <label for="search">I'm in the mood for...</label>
-                                                        <input type="text" class="form-control" id="search-term"
-                                                            placeholder="Tacos, pizza, sports bar, etc."
-                                                            required="true">
+
+                                                    <!-- Here we create the text box for capturing the search term-->
+
+                                                    <div class="form-group">   
+                                                        <label for="pwd">I'm in the mood for..</label>
+                                                        <select id="search-term" class="custom-select" required="true"
+                                                            aria-labelledby="dropdownMenuButton">
+                                                            <!-- Setting the option for 5 as default -->
+                                                            <option selected value="Restaurants">Random</option>
+                                                            <option value="Asian%20Fusion">Asian Fusion</option>
+                                                            <option value="Bagels">Bagels</option>
+                                                            <option value="Bakery">Bakery</option>
+                                                            <option value="Bar">Bar</option>
+                                                            <option value="Barbeque">Barbeque</option>
+                                                            <option value="Breakfast">Breakfast</option>
+                                                            <option value="British">British</option>
+                                                            <option value="Brunch">Brunch</option>
+                                                            <option value="Buffet">Buffet</option>
+                                                            <option value="Burgers">Burgers</option>
+                                                            <option value="Cajun">Cajun</option>
+                                                            <option value="Caribbean">Caribbean</option>
+                                                            <option value="Chinese">Chinese</option>
+                                                            <option value="Coffee">Coffee</option>
+                                                            <option value="Country%20Food">Country Food</option>
+                                                            <option value="Cuban">Cuban</option>
+                                                            <option value="Deli">Deli</option>
+                                                            <option value="Doughnuts">Doughnuts</option>
+                                                            <option value="Family%20Fare">Family Fare</option>
+                                                            <option value="Fast%20Food">Fast Food</option>
+                                                            <option value="Fine%20Dining">Fine Dining</option>
+                                                            <option value="Food%20Trucks">Food Trucks</option>
+                                                            <option value="French">French</option>
+                                                            <option value="Cajun">German</option>
+                                                            <option value="Greek">Greek</option>
+                                                            <option value="Hot%20Dogs">Hot Dogs</option>
+                                                            <option value="Ice%20Cream">Ice Cream</option>
+                                                            <option value="Indian">Indian</option>
+                                                            <option value="Irish">Irish</option>
+                                                            <option value="Italian">Italian</option>
+                                                            <option value="Japanese">Japanese</option>
+                                                            <option value="Latin%20American">Latin American</option>
+                                                            <option value="Live%20Entertainment">Live Entertainment</option>
+                                                            <option value="Mediterannean">Mediterranean</option>
+                                                            <option value="Mexican">Mexican</option>
+                                                            <option value="Nouvelle">Nouvelle</option>
+                                                            <option value="Pancakes">Pancakes</option> 
+                                                            <option value="Pizza">Pizza</option>
+                                                            <option value="Polish">Polish</option>
+                                                            <option value="Sandwiches">Sandwiches</option>
+                                                            <option value="Seafood">Seafood</option>
+                                                            <option value="Soul%20Food">Soul Food</option>
+                                                            <option value="Soup%20&%20Salad">Soup & Salad</option>
+                                                            <option value="Southern">Southern</option>
+                                                            <option value="Spanish">Spanish</option>
+                                                            <option value="Sports%20Bar">Sports Bar</option>
+                                                            <option value="Steaks">Steaks</option>
+                                                            <option value="Sushi">Sushi</option>
+                                                            <option value="Tapas">Tapas</option>
+                                                            <option value="Thai">Thai</option>
+                                                            <option value="Vegetaraian">Vegetaraian</option>
+                                    
+                                                                                                                </select>
                                                     </div>
 
                                                     <!-- Here we capture the number of records that the user wants to retrieve  -->
@@ -145,6 +222,9 @@
 
                                             <!-- This main card will hold each of the resulting restaurants -->
                                             <div class="card-body" id="restaurant-section">
+                                                <!-- jQuery UI collapsible panels -->
+                                                <div id="accordion-yelp">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -259,18 +339,23 @@
 
                                             <!-- This main card will hold each of the resulting movies -->
                                             <div class="card-body" id="movie-results">
+
+                                                <!-- jQuery UI collapsible panels -->
+                                                <div id="accordion-movies">
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
 
-
-
+                                
                             </div>
                         </div>
                     </div> <!-- col-md-6-->
                 </div> <!-- card-->
-
+                
 
 
             </div>
@@ -290,7 +375,6 @@
             </nav> -->
 
             <footer></footer>
-
 
             <!-- local JS file -->
             <script src="assets/javascript/movies.js" async defer></script>
