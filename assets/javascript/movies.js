@@ -425,10 +425,6 @@ $.ajax (
 // Pull JSON from TMDB on click
 $("#pick-movies").on("click", function (event) {
     event.preventDefault(); // This is necessary to prevent page refresh
-<<<<<<< HEAD
-    $("#movie-results").show();
-    
-=======
 
     database.ref().once("value", function (snapshot) {
         let numOfSearches;
@@ -440,7 +436,6 @@ $("#pick-movies").on("click", function (event) {
         });
     });
 
->>>>>>> 87426b680f8cdfc3773fecd304dc861ad101fad5
     let numOfMoviesList = document.getElementById("number-of-movies");
     let numOfMoviesChoice = numOfMoviesList.options[numOfMoviesList.selectedIndex].value;
     

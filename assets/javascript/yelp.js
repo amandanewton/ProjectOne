@@ -15,7 +15,7 @@
   // FUNCTIONS
   // ==========================================================
 
-function buildQueryURL() {
+  function buildQueryURL() {
     // queryURL is the base of the url we'll use to query the API
     var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?sort_by=best_match";
 
