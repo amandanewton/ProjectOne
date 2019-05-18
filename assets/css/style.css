@@ -147,3 +147,16 @@ footer {
   .restaurantHeadline {
     line-height: 1.5;
   }
+
+  .form-group {
+      color: white;
+  }
+
+  .card-header {
+      color: white;
+      text-align: center;
+  }
+
+  .card-body {
+      border: 2px solid white;
+  }
