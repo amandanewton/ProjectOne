@@ -426,6 +426,7 @@ $.ajax (
 // Pull JSON from TMDB on click
 $("#pick-movies").on("click", function (event) {
     event.preventDefault(); // This is necessary to prevent page refresh
+    $("#movie-results").show();
     
     let numOfMoviesList = document.getElementById("number-of-movies");
     let numOfMoviesChoice = numOfMoviesList.options[numOfMoviesList.selectedIndex].value;
